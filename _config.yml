@@ -24,7 +24,7 @@ favicon: /public/img/me/horse.png
 
 # google analytics 设置
 ga:
-  id: 
+  id:  
   url: http://anxingle.github.io/
 
 # disqus 设置
