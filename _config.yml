@@ -7,9 +7,9 @@ author:
   name: anxingle
   email: anxingle820@gmail.com
   link:  anxingle.github.io
-  weibo:  
+  weibo: http://weibo.com/2459205691/profile?topnav=1&wvr=6
   github: github.com/anxingle
-  music:
+  music: http://music.163.com/#/user/home?id=57312747
   linkedin: 
 
 # 站点信息
@@ -24,7 +24,7 @@ favicon: /public/img/me/horse.png
 
 # google analytics 设置
 ga:
-  id: UA-65276774-1
+  id: 
   url: http://anxingle.github.io/
 
 # disqus 设置
@@ -32,7 +32,7 @@ disqus:
   shortname: anxingle
 
 # 主题设置，自动激活某个标签
-active: 生活
+active: 计算机
 
 # 首页除了最新文章外显示分类
 # cates: 
