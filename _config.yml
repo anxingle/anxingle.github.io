@@ -25,11 +25,11 @@ favicon: /public/img/me/horse.png
 # google analytics 设置
 ga:
   id: UA-65276774-1
-  url: http://equusprobus.github.io/
+  url: http://anxingle.github.io/
 
 # disqus 设置
 disqus:
-  shortname: equusprobus
+  shortname: anxingle
 
 # 主题设置，自动激活某个标签
 active: 生活
