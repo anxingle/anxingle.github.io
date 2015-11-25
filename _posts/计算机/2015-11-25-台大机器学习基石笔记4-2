@@ -1,0 +1,27 @@
+---
+layout: post
+title: 台大机器学习基石笔记4-2
+category: 计算机
+tags: 数学  机器学习
+keywords: 
+description: 
+---
+
+## 补救措施（使机器学习成为可能） ##
+
+我们通过上一节课，知道无法精确的通过已知样本来求得适合所有样本集的g。回想曾经学过的概率统计知识，即使我们不能够得到总体情况，但是依然可以通过抽样来“近似”得到总体大致的情况。
+
+现在有一个很大的盒子，里面充满了很多很多的橘色和绿色的弹珠。   
+
+![台大林轩田-机器学习基石头](/public/img/ML/4_2_1.jpg)
+
+
+只要你学过概率与统计（即使没有学过，傻子也知道）就应该知道，我们完全可以试着来抽样嘛！   
+
+![取样为N的条件下u与v的关系](/public/img/ML/4_2_2.jpg)  
+
+罐子（bin）里的橘色弹珠的比例为u，取样的橘色弹珠比例为v。他们两个的关系可以通过Hoeffding's Inequality来确定：   
+
+![大样本情况下的近似关系](/public/img/ML/4_2_3.jpg)    
+
+也就是说，u和v相差大于<img src="https://latex.codecogs.com/gif.latex?\varepsilon" title="\varepsilon" />的概率为 <img src="https://latex.codecogs.com/gif.latex?\varepsilon" title="\varepsilon" />
