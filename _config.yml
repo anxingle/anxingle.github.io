@@ -27,11 +27,11 @@ ga:
   id:  
   url: http://anxingle.github.io/
 
-# disqus 设置
+# disqus 设置  评论框-留言模块
 disqus:
   shortname: anxingle
 
-# 主题设置，自动激活某个标签
+# 主题设置，自动激活某个标签|默认主页显示的分类文章
 active: 计算机
 
 # 首页除了最新文章外显示分类
