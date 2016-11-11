@@ -3,13 +3,17 @@ layout: post
 title: 最新DeepLearning 论文集
 category: 计算机
 tags: 神经网络
-keywords: 
+keywords:  机器学习
 description: 
 ---
 
 
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 94648e4002405f2139d574e47e57a84f026478db
 ## Object Recognition
 * Learning to Make Better Mistakes: Semantics-aware Visual Food Recognition, okt 2016, IBM, [paper](http://delivery.acm.org/10.1145/2970000/2967205/p172-wu.pdf)
 * T-CNN: Tubelets with Convolutional Neural Networks for Object Detection from Videos, aug 2016, [github](https://github.com/myfavouritekk/T-CNN), [arxiv](https://arxiv.org/pdf/1604.02532v3)
