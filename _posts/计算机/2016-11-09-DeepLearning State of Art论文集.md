@@ -19,8 +19,16 @@ description:
 * Scene Text Script Identification with Convolutional Recurrent Neural Networks [paper](http://www.nlpr.ia.ac.cn/icfhr2016/program.htm)        
 * A Simple Way to Initialize Recurrent Networks of Rectified Linear Units [paper](https://arxiv.org/abs/1504.00941) **Google paper，强烈推荐**     
 * Generating Sequences With Recurrent Neural Networks [paper](https://arxiv.org/abs/1308.0850) **Alex论文，RNN入门首选**    
-* Recurrent Neural Network Regularization [paper](https://arxiv.org/abs/1409.2329) **就是说一下怎么在RNN中应用Dropout**
-* Recurrent Batch Normalization [paper](https://arxiv.org/abs/1603.09025) **RNN中应用normalization效果好**
+* Recurrent Neural Network Regularization [paper](https://arxiv.org/abs/1409.2329) **就是说一下怎么在RNN中应用Dropout**     
+* Recurrent Batch Normalization [paper](https://arxiv.org/abs/1603.09025) **RNN中应用normalization效果好**      
+
+## Style Transfer
+* A learned representation for artistic style, okt 2016, Google, [arxiv](https://arxiv.org/pdf/1610.07629v1.pdf), [demo](https://magenta.tensorflow.org/2016/11/01/multistyle-pastiche-generator/)
+* Fast Style Transfer in TensorFlow, [github](https://github.com/lengstrom/fast-style-transfer/)
+* https://arxiv.org/abs/1508.06576
+* https://arxiv.org/abs/1607.08022
+* http://cs.stanford.edu/people/jcjohns/eccv16/
+
 
 ## Object Recognition
 * Learning to Make Better Mistakes: Semantics-aware Visual Food Recognition, okt 2016, IBM, [paper](http://delivery.acm.org/10.1145/2970000/2967205/p172-wu.pdf)
@@ -48,12 +56,6 @@ description:
 * FaceNet: A Unified Embedding for Face Recognition and Clustering, jun 2015, [paper](http://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Schroff_FaceNet_A_Unified_2015_CVPR_paper.pdf)
 * Multi-view Face Detection Using Deep Convolutional Neural Networks, yahoo, feb 2015, [arxiv](https://arxiv.org/pdf/1502.02766v3.pdf)
 
-## Style Transfer
-* A learned representation for artistic style, okt 2016, Google, [arxiv](https://arxiv.org/pdf/1610.07629v1.pdf), [demo](https://magenta.tensorflow.org/2016/11/01/multistyle-pastiche-generator/)
-* Fast Style Transfer in TensorFlow, [github](https://github.com/lengstrom/fast-style-transfer/)
-* https://arxiv.org/abs/1508.06576
-* https://arxiv.org/abs/1607.08022
-* http://cs.stanford.edu/people/jcjohns/eccv16/
 
 ## Logo Recognition
 * Automatic Graphic Logo Detection via Fast Region-based Convolutional Networks, apr 2016, [arxiv](https://arxiv.org/pdf/1604.06083.pdf)
