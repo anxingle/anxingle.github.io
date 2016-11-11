@@ -12,15 +12,15 @@ description:
 
 ## Text Recognition     
 *  Fully Convolutional Recurrent Network for Handwritten Chinese Text Recognition [paper](https://arxiv.org/abs/1604.04953)       
-#  Deep LSTM Networks for Online Chinese Handwriting Recognition  [2016 ICFHR](http://www.nlpr.ia.ac.cn/icfhr2016/)       
-#  Convolution Multi-directional Recurrent Network for Offline Handwritten Text Recognition   [2016 ICFHR](http://www.nlpr.ia.ac.cn/icfhr2016/)     
-#  Sequence to Sequence Learning with Neural Networks [paper](http://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf)     
-# Deep Neural Network based Hidden Markov Model for Offline Handwritten Chinese Text Recognition [paper](http://www.nlpr.ia.ac.cn/icfhr2016/program.htm)       
-# Scene Text Script Identification with Convolutional Recurrent Neural Networks [paper](http://www.nlpr.ia.ac.cn/icfhr2016/program.htm)        
-# A Simple Way to Initialize Recurrent Networks of Rectified Linear Units [paper](https://arxiv.org/abs/1504.00941) **Google paper，强烈推荐**     
-# Generating Sequences With Recurrent Neural Networks [paper](https://arxiv.org/abs/1308.0850) **Alex论文，RNN入门首选**    
-# Recurrent Neural Network Regularization [paper](https://arxiv.org/abs/1409.2329) **就是说一下怎么在RNN中应用Dropout**
-# Recurrent Batch Normalization [paper](https://arxiv.org/abs/1603.09025) **RNN中应用normalization效果好**
+*  Deep LSTM Networks for Online Chinese Handwriting Recognition  [2016 ICFHR](http://www.nlpr.ia.ac.cn/icfhr2016/)       
+*  Convolution Multi-directional Recurrent Network for Offline Handwritten Text Recognition   [2016 ICFHR](http://www.nlpr.ia.ac.cn/icfhr2016/)     
+*  Sequence to Sequence Learning with Neural Networks [paper](http://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf)     
+* Deep Neural Network based Hidden Markov Model for Offline Handwritten Chinese Text Recognition [paper](http://www.nlpr.ia.ac.cn/icfhr2016/program.htm)       
+* Scene Text Script Identification with Convolutional Recurrent Neural Networks [paper](http://www.nlpr.ia.ac.cn/icfhr2016/program.htm)        
+* A Simple Way to Initialize Recurrent Networks of Rectified Linear Units [paper](https://arxiv.org/abs/1504.00941) **Google paper，强烈推荐**     
+* Generating Sequences With Recurrent Neural Networks [paper](https://arxiv.org/abs/1308.0850) **Alex论文，RNN入门首选**    
+* Recurrent Neural Network Regularization [paper](https://arxiv.org/abs/1409.2329) **就是说一下怎么在RNN中应用Dropout**
+* Recurrent Batch Normalization [paper](https://arxiv.org/abs/1603.09025) **RNN中应用normalization效果好**
 
 ## Object Recognition
 * Learning to Make Better Mistakes: Semantics-aware Visual Food Recognition, okt 2016, IBM, [paper](http://delivery.acm.org/10.1145/2970000/2967205/p172-wu.pdf)
