@@ -18,7 +18,8 @@ description:
 1.    我们在某个目录下 执行 virtualenv tensorflow_ocr.就会创建一个名为 tensorflow_ocr的目录，windows下 tensorflow_ocr\Script\activate.bat就是激活环境的脚本，linux下为 tensorflow_ocr\bin\activate（source activate）。在Script目录下执行 activate.act，激活这个虚拟环境。  大家的python环境都不一样，我现在假定你（这个虚拟环境）一穷二白，什么包都没有。我们首先安装numpy这个矩阵库，然后再安装opencv这个库，之后各种库就看自己需要吧。  你需要首先去 [Conda官方源(其中一个发布源)](https://anaconda.org/menpo/)  下载opencv， 去 [Pypi官方源](https://pypi.python.org/packages)  下载numpy。  如果不是很确定numpy的版本（估计tensorflow版本更新，numpy会要求最新的），那就下载最新的。  请看好是win32还是win64，是python3.5还是python3.4还是python2.7。 如果判断自己需要的版本还是很困难，那么你可以先跳过这一步（实际上如果网速好，也可以完全不理会对numpy的安装，系统会自动给你装好的）。
 2.    下载好的opencv应该是win-64/opencv3-3.1.0-py35_0.tar.bz2。 conda install XXX.tar.bz2就行了。或者你下的是whl的，那就pip install XXX.whl 也行。  然后pip install numpy_XXX_XXX.whl。这样opencv和numpy就安装好了。                
 ##  安装tensorflow
-1  在github的tensorflow主页安装指南这里，你应该会看到这么一副图：     
+1  在github的tensorflow主页安装指南这里，你应该会看到这么一副图：        
+  
 ```bash
 # Ubuntu/Linux 64-bit, CPU only, Python 2.7
 $ export TF_BINARY_URL=https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.12.1-cp27-none-linux_x86_64.whl
@@ -47,7 +48,8 @@ $ export TF_BINARY_URL=https://storage.googleapis.com/tensorflow/linux/gpu/tenso
 
 ```bash
 C:\> pip install --upgrade https://storage.googleapis.com/tensorflow/windows/cpu/tensorflow-0.12.1-cp35-cp35m-win_amd64.whl    
-```    
+```               
+
 下载它（CPU版），在虚拟环境中执行 pip install tensor_XXX_XXX.whl就可以了。在这一步中它会检查必要的包，然后自动给你安装上（所以上一步我说如果网速好，可以跳过安装numpy这一步）。    
 
 tensorflow安装好了，进入tensorflow_ocr\Script\这个目录，执行activate.bat就会激活这个虚拟环境（仅仅相当于各种包以及python解释器是单独引入的），或者deactivate.bat来退出这个虚拟环境。
