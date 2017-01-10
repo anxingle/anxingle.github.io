@@ -41,9 +41,10 @@ $ export TF_BINARY_URL=https://storage.googleapis.com/tensorflow/linux/cpu/tenso
 # Ubuntu/Linux 64-bit, GPU enabled, Python 3.5
 # Requires CUDA toolkit 8.0 and CuDNN v5. For other versions, see "Installing from sources" below.
 $ export TF_BINARY_URL=https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-0.12.1-cp35-cp35m-linux_x86_64.whl
+```          
 
-```     
-看的我头大，我们需要哪个的话，就直接把URL放到迅雷里面，然后直接下载就好了，速度相当快。  我们看到
+看的我头大，我们需要哪个的话，就直接把URL放到迅雷里面，然后直接下载就好了，速度相当快。  我们看到            
+
 ```bash
 C:\> pip install --upgrade https://storage.googleapis.com/tensorflow/windows/cpu/tensorflow-0.12.1-cp35-cp35m-win_amd64.whl    
 ```    
