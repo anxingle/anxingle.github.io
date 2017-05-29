@@ -100,8 +100,17 @@ sudo ldconfig -v
 ```shell
 # 拉取相关代码
 git clone https://github.com/davisking/dlib.git
-```
-2. 开始编译
+```       
+2. 扩大交换分区      
+因为树莓派编译中极有可能发生内存不足的问题，所以临时性解决方案就是扩大swap分区。      
+```shell
+sudo nano /etc/dphys-swapfile
+#将CONF_SWAPSIZE=100改成 CONF_SWAPSIZE=1024 保存，退出         
+sudo /etc/init.d/dphys-swapfile restart      
+
+```   
+
+3. 开始编译
 ```shell
 sudo python setup.py build
 sudo python setup.py install
