@@ -54,7 +54,7 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
 	-D INSTALL_C_EXAMPLES=ON \
 	-D INSTALL_PYTHON_EXAMPLES=ON \
 	-D BUILD_EXAMPLES=ON ..
-make -j4
+make -j $(nproc)
 sudo make install  
 ```      
 ## 编译boost库
