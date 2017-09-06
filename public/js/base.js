@@ -1,9 +1,3 @@
-/* 数学公式引擎 */
-$(document).ready(function() {
-    GenerateContentList();
-    // 测试
-    loadScript("https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML");
-});
 /* 控制导航按钮动作 */
 function nav_click(is_show) {
   if (is_show) {
