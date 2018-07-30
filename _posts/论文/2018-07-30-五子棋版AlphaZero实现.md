@@ -76,6 +76,6 @@ AlphaGo出来之后，对它的解读一直不断，而AlphaGo Zero和AlphaZero�
 
 + 感谢[Uloud](https://www.ucloud.cn/) 提供的P40 AI-train服务，1256小时/实例的训练，验证了不少想法。而且最后还免单了，中间没少打扰技术支持。特别感谢他们。
 
-  <img src="http://p324ywv2g.bkt.clouddn.com/test2.jpg" width="500px">
+  <img src="http://p324ywv2g.bkt.clouddn.com/test2.jpg" width="600px">
 
 
