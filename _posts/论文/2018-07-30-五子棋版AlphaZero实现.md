@@ -40,7 +40,7 @@ AlphaGo出来之后，对它的解读一直不断，而AlphaGo Zero和AlphaZero�
 
 在[AlphaPig](https://github.com/anxingle/AlphaPig)中，我们将最近下的9个位置(黑，白…当前是否黑)作为特征输入卷积网络，然后得到225个行棋概率。
 
-<img src="http://p28sk9doh.bkt.clouddn.com/policy.jpg" height="100px" />
+<img src="http://p28sk9doh.bkt.clouddn.com/policy.jpg" width="500px" />
 
 ## 价值网络
 
@@ -57,7 +57,7 @@ AlphaGo出来之后，对它的解读一直不断，而AlphaGo Zero和AlphaZero�
 可以尝试在evaluate目录下，自己和训练的AI对弈，来增加数据，或者搭建局域网对弈，收集更多人机博弈的棋谱。
 
 
- <img src="http://p324ywv2g.bkt.clouddn.com/test.jpg" height="100px" />
+ <img src="http://p324ywv2g.bkt.clouddn.com/test.jpg" width="600px" />
 
  
 
