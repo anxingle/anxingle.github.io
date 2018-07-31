@@ -67,7 +67,7 @@ AlphaGo出来之后，对它的解读一直不断，而AlphaGo Zero和AlphaZero�
 
 对弈棋局棋谱保存，fix棋谱边缘估值（策略）网络智障。
 
-更多进展，请follow [github](https://github.com/anxingle/AlphaPig)。
+更多进展，请follow [AlphaPig](https://github.com/anxingle/AlphaPig)。
 
 #### 特别致谢
 
