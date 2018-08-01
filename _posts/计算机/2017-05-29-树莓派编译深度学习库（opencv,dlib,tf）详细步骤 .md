@@ -16,8 +16,8 @@ description:
 
 打开编辑 /etc/apt/sources.list 文件，删除里面的内容，增加如下：   
 ```python
-deb http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ jessie main non-free contrib
-deb-src http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ jessie main non-free contrib
+deb https://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ jessie main non-free contrib
+deb-src https://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ jessie main non-free contrib
 ```     
 之后请在**终端**执行：  
 ```python
@@ -61,7 +61,7 @@ sudo make install
 ```shell
 # 获取boost源代码    
 
-wget http://101.96.10.75/ncu.dl.sourceforge.net/project/boost/boost/1.62.0/boost_1_62_0.tar.bz2      
+wget https://101.96.10.75/ncu.dl.sourceforge.net/project/boost/boost/1.62.0/boost_1_62_0.tar.bz2      
 # 解压源代码
 tar xf boost_1_62_0.tar.bz2  
 cd boost_1_62_0/
