@@ -32,7 +32,7 @@ disqus:
   shortname: anxingle
 
 # 主题设置，自动激活某个标签|默认主页显示的分类文章
-active: 计算机
+active: 论文
 
 # 首页除了最新文章外显示分类
 # cates: 
