@@ -39,33 +39,10 @@ Seq2Seq模型依赖于encoder-decoder结构。Encoder端对输入序列编码，
 
 现在有了向量 $e$ 捕获了输入序列的信息，下面使用它来一个单词一个单词的产生目标单词序列。隐层状态 $e$ 和特殊的开始标记 $W_{sos}$ 向量作为输入来送入LSTM单元。LSTM计算了下一个隐藏层状态<a href="https://www.codecogs.com/eqnedit.php?latex=\fn_jvn&space;\large&space;h_{0}\in&space;R^{h}" target="_blank"><img src="https://latex.codecogs.com/png.latex?\fn_jvn&space;\large&space;h_{0}\in&space;R^{h}" title="\large h_{0}\in R^{h}" /></a>。然后应用函数<a href="https://www.codecogs.com/eqnedit.php?latex=\fn_jvn&space;\LARGE&space;g&space;:&space;R^{h}\Rightarrow&space;R^{V}" target="_blank"><img src="https://latex.codecogs.com/png.latex?\fn_jvn&space;\LARGE&space;g&space;:&space;R^{h}\Rightarrow&space;R^{V}" title="\LARGE g : R^{h}\Rightarrow R^{V}" /></a> ，这样$s_{0} := g(h_{0})$ 是词汇表中同样大小的向量。
 
-$$
-h_{0} = LSTM(e, w_{sos})
-$$
-
-$$
-s_{0} = g(h{_0})
-$$
-$$
-p_{0} = softmax(s_{0})
-$$
-$$
-i_{0} = argmax(p_{0})
-$$
+<a href="https://www.codecogs.com/eqnedit.php?latex=\fn_jvn&space;h_{0}&space;=&space;LSTM(e,&space;w_{sos})&space;\\&space;{\color{Red}&space;}s_{0}&space;=&space;g(h{_0})&space;\\&space;p_{0}&space;=&space;softmax(s_{0})&space;\\&space;i_{0}&space;=&space;argmax(p_{0})&space;\\&space;{\color{Red}&space;}" target="_blank"><img src="https://latex.codecogs.com/png.latex?\fn_jvn&space;h_{0}&space;=&space;LSTM(e,&space;w_{sos})&space;\\&space;{\color{Red}&space;}s_{0}&space;=&space;g(h{_0})&space;\\&space;p_{0}&space;=&space;softmax(s_{0})&space;\\&space;i_{0}&space;=&space;argmax(p_{0})&space;\\&space;{\color{Red}&space;}" title="h_{0} = LSTM(e, w_{sos}) \\ {\color{Red} }s_{0} = g(h{_0}) \\ p_{0} = softmax(s_{0}) \\ i_{0} = argmax(p_{0}) \\ {\color{Red} }" /></a>
 
 之后，$s_{0}$经过softmax来正则化后进入概率矩阵$p_{0}\in R^{V}$ 。每个实体的 $p_{0}$ 用来衡量它和单词表中的单词的相似度。可以说“干”具有最高的概率（也就说$i_{0} = argmax(p_{0})$ 对应“干”的索引）。得到对应的向量$W_{i_{0}} = W_{干}$，然后重复这个过程：继续将隐藏层状态$h_{0}$ 和 $W_{干}$输入LSTM，LSTM再输出对应第二个词的概率矩阵$p_{1}$...
-$$
-h_{1} = LSTM(h_{0}, w_{i_{0}})
-$$
-$$
-s_{1} = g(h{_1})
-$$
-$$
-p_{1} = softmax(s_{1})
-$$
-$$
-i_{1} = argmax(p_{1})
-$$
+<a href="https://www.codecogs.com/eqnedit.php?latex=\fn_jvn&space;h_{1}&space;=&space;LSTM(h_{0},&space;w_{i_{0}})&space;\\&space;s_{1}&space;=&space;g(h{_1}).&space;\\&space;p_{1}&space;=&space;softmax(s_{1})&space;\\&space;i_{1}&space;=&space;argmax(p_{1})" target="_blank"><img src="https://latex.codecogs.com/png.latex?\fn_jvn&space;h_{1}&space;=&space;LSTM(h_{0},&space;w_{i_{0}})&space;\\&space;s_{1}&space;=&space;g(h{_1}).&space;\\&space;p_{1}&space;=&space;softmax(s_{1})&space;\\&space;i_{1}&space;=&space;argmax(p_{1})" title="h_{1} = LSTM(h_{0}, w_{i_{0}}) \\ s_{1} = g(h{_1}). \\ p_{1} = softmax(s_{1}) \\ i_{1} = argmax(p_{1})" /></a>
 
 当解码器遇到特殊停止符（往往是"<eos>"）的时候，解码过程就会停止。
 <img src="https://raw.githubusercontent.com/anxingle/Exam/master/pic/seq2seq/seq2seq_vanilla_decoder-2.png" width="550px" />
