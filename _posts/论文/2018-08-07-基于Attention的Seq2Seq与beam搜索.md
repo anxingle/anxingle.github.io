@@ -37,7 +37,7 @@ Seq2Seq模型依赖于encoder-decoder结构。Encoder端对输入序列编码，
 
 #### 解码器
 
-现在有了向量 $e$ 捕获了输入序列的信息，下面使用它来一个单词一个单词的产生目标单词序列。隐层状态 $e$ 和特殊的开始标记 $W_{sos}$ 向量作为输入来送入LSTM单元。LSTM计算了下一个隐藏层状态$h_{0}\in R^{h}$。然后应用函数$ g : R^{h}\Rightarrow R^{V}$ ，这样$s_{0} := g(h_{0})$ 是词汇表中同样大小的向量。
+现在有了向量 $e$ 捕获了输入序列的信息，下面使用它来一个单词一个单词的产生目标单词序列。隐层状态 $e$ 和特殊的开始标记 $W_{sos}$ 向量作为输入来送入LSTM单元。LSTM计算了下一个隐藏层状态<a href="https://www.codecogs.com/eqnedit.php?latex=\fn_jvn&space;\large&space;h_{0}\in&space;R^{h}" target="_blank"><img src="https://latex.codecogs.com/png.latex?\fn_jvn&space;\large&space;h_{0}\in&space;R^{h}" title="\large h_{0}\in R^{h}" /></a>。然后应用函数<a href="https://www.codecogs.com/eqnedit.php?latex=\fn_jvn&space;\LARGE&space;g&space;:&space;R^{h}\Rightarrow&space;R^{V}" target="_blank"><img src="https://latex.codecogs.com/png.latex?\fn_jvn&space;\LARGE&space;g&space;:&space;R^{h}\Rightarrow&space;R^{V}" title="\LARGE g : R^{h}\Rightarrow R^{V}" /></a> ，这样$s_{0} := g(h_{0})$ 是词汇表中同样大小的向量。
 
 $$
 h_{0} = LSTM(e, w_{sos})
