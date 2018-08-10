@@ -100,27 +100,27 @@ $$
 $$
 i_{t} = argmax(p_{t})
 $$
-向量 $c_{t}$ 就是注意力（或称上下文）向量。每一步**解码**的过程计算一个新的注意力向量。首先，使用函数$f(h_{t-1}, e_{e_{t^{`}}})\Rightarrow \alpha_{t_{`}} \in R$ 计算**编码器**每一个隐藏层状态$e_{t_{`}}$ 的分数；之后使用softmax正则化$\alpha_{t_{`}}$，然后与$e_{t_{`}}$ 加权计算$c_{t}$:
+向量 $c_{t}$ 就是注意力（或称上下文）向量。每一步**解码**的过程计算一个新的注意力向量。首先，使用函数$f(h_{t-1}, e_{e_{t^{old}}})\Rightarrow \alpha_{t_{old}} \in R$ 计算**编码器**每一个隐藏层状态$e_{t_{old}}$ 的分数；之后使用softmax正则化$\alpha_{t_{old}}$，然后与$e_{t_{old}}$ 加权计算$c_{t}$:
 $$
-\alpha_{t_{`}} = f(h_{t-1}, e_{t_{`}})
+\alpha_{t_{old}} = f(h_{t-1}, e_{t_{old}})
 $$
 $$
 \overline{\alpha} = softmax(\alpha)
 $$
 
 $$
-c_{t} = \sum_{t_{`}=0}^n\overline{\alpha}_{t_{`}}{e_{t_{`}}}
+c_{t} = \sum_{t_{old}=0}^n\overline{\alpha}_{t_{old}}{e_{t_{old}}}
 $$
 
 <img src="https://raw.githubusercontent.com/anxingle/Exam/master/pic/seq2seq/seq2seq_attention_mechanism_new.png" width="700px" />
 
-在这里，计算注意力向量$\alpha_{t_{`}}$ 的函数$f$那可就多啦，一般也就下面几种：
+在这里，计算注意力向量$\alpha_{t_{old}}$ 的函数$f$那可就多啦，一般也就下面几种：
 $$
-f(h_{t-1}, e_{t_{`}}) = \begin{cases}
+f(h_{t-1}, e_{t_{old}}) = \begin{cases}
 
-h^{T}_{t-1} e_{t_{`}} &\text{dot}\\
-h^{T}_{t-1} W e_{t_{`}} &\text{general} \\
-v^{T}tanh(W[h_{t-1},e_{t_{`}}])   &\text{concat}
+h^{T}_{t-1} e_{t_{old}} &\text{dot}\\
+h^{T}_{t-1} W e_{t_{old}} &\text{general} \\
+v^{T}tanh(W[h_{t-1},e_{t_{old}}])   &\text{concat}
 
 \end{cases}
 $$
