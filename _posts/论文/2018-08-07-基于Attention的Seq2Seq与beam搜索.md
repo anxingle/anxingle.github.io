@@ -42,13 +42,18 @@ Seq2Seq模型依赖于encoder-decoder结构。Encoder端对输入序列编码，
 $$
 h_{0} = LSTM(e, w_{sos})
 $$
+,
 
 $$
 s_{0} = g(h{_0})
 $$
+,
+
 $$
 p_{0} = softmax(s_{0})
 $$
+,
+
 $$
 i_{0} = argmax(p_{0})
 $$
@@ -57,12 +62,18 @@ $$
 $$
 h_{1} = LSTM(h_{0}, w_{i_{0}})
 $$
+,
+
 $$
 s_{1} = g(h{_1})
 $$
+,
+
 $$
 p_{1} = softmax(s_{1})
 $$
+,
+
 $$
 i_{1} = argmax(p_{1})
 $$
@@ -91,12 +102,18 @@ $$
 $$
 h_{t} = LSTM(h_{t-1}, [w_{i_{t-1}}, c_{t}])
 $$
+,
+
 $$
 s_{t} = g(h_{t})
 $$
+,
+
 $$
 p_{t} = softmax(s_{t})
 $$
+,
+
 $$
 i_{t} = argmax(p_{t})
 $$
@@ -104,9 +121,12 @@ $$
 $$
 \alpha_{t_{old}} = f(h_{t-1}, e_{t_{old}})
 $$
+,
+
 $$
 \overline{\alpha} = softmax(\alpha)
 $$
+,
 
 $$
 c_{t} = \sum_{t_{old}=0}^n\overline{\alpha}_{t_{old}}{e_{t_{old}}}
@@ -115,6 +135,8 @@ $$
 <img src="https://raw.githubusercontent.com/anxingle/Exam/master/pic/seq2seq/seq2seq_attention_mechanism_new.png" width="700px" />
 
 在这里，计算注意力向量$\alpha_{t_{old}}$ 的函数$f$那可就多啦，一般也就下面几种：
+<img src="https://latex.codecogs.com/png.latex?\LARGE&space;$$&space;f(h_{t-1},&space;e_{t_{old}})&space;=&space;\begin{cases}&space;h^{T}_{t-1}&space;e_{t_{old}}&space;&\text{dot}\\&space;h^{T}_{t-1}&space;W&space;e_{t_{old}}&space;&\text{general}&space;\\&space;v^{T}tanh(W[h_{t-1},e_{t_{old}}])&space;&\text{concat}&space;\end{cases}&space;$$" title="\LARGE $$ f(h_{t-1}, e_{t_{old}}) = \begin{cases} h^{T}_{t-1} e_{t_{old}} &\text{dot}\\ h^{T}_{t-1} W e_{t_{old}} &\text{general} \\ v^{T}tanh(W[h_{t-1},e_{t_{old}}]) &\text{concat} \end{cases} $$" />
+，
 $$
 f(h_{t-1}, e_{t_{old}}) = \begin{cases}
 
@@ -196,7 +218,7 @@ $$
 
 下面，让我们应用Seq2Seq到图像生成LaTex上吧！
 
-​									 [看代码](https://anxingle.github.io)
+									 [看代码](https://anxingle.github.io)
 
 Seq2Seq经典论文：
 
