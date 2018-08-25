@@ -135,8 +135,11 @@ $$
 <img src="https://raw.githubusercontent.com/anxingle/Exam/master/pic/seq2seq/seq2seq_attention_mechanism_new.png" width="700px" />
 
 在这里，计算注意力向量$\alpha_{t_{old}}$ 的函数$f$那可就多啦，一般也就下面几种：
-<img src="https://latex.codecogs.com/png.latex?\LARGE&space;$$&space;f(h_{t-1},&space;e_{t_{old}})&space;=&space;\begin{cases}&space;h^{T}_{t-1}&space;e_{t_{old}}&space;&\text{dot}\\&space;h^{T}_{t-1}&space;W&space;e_{t_{old}}&space;&\text{general}&space;\\&space;v^{T}tanh(W[h_{t-1},e_{t_{old}}])&space;&\text{concat}&space;\end{cases}&space;$$" title="\LARGE $$ f(h_{t-1}, e_{t_{old}}) = \begin{cases} h^{T}_{t-1} e_{t_{old}} &\text{dot}\\ h^{T}_{t-1} W e_{t_{old}} &\text{general} \\ v^{T}tanh(W[h_{t-1},e_{t_{old}}]) &\text{concat} \end{cases} $$" />
-，
+<img src="https://latex.codecogs.com/png.latex?\LARGE&space;&space;f(h_{t-1},&space;e_{t_{old}})&space;=&space;\begin{cases}&space;h^{T}_{t-1}&space;e_{t_{old}}&space;&\text{dot}\\&space;h^{T}_{t-1}&space;W&space;e_{t_{old}}&space;&\text{general}&space;\\&space;v^{T}tanh(W[h_{t-1},e_{t_{old}}])&space;&\text{concat}&space;\end{cases}&space;" title="\LARGE  f(h_{t-1}, e_{t_{old}}) = \begin{cases} h^{T}_{t-1} e_{t_{old}} &\text{dot}\\ h^{T}_{t-1} W e_{t_{old}} &\text{general} \\ v^{T}tanh(W[h_{t-1},e_{t_{old}}]) &\text{concat} \end{cases} " />
+，          
+
+
+
 这样子注意力权重$\overline{\alpha}$ 很容易解释了。当产生单词**vas**的时候（对应英语**are**），我们期望$\overline{\alpha}_{are}$ 接近1，而$\overline{\alpha}_{how}$和$\overline{\alpha}_{you}$接近0。直觉上注意力向量$c$大致接近**are**的隐含层向量，它有助于产生法语单词**vas**。
 
 通过将注意力权重送入矩阵（行=输入序列，列=输出序列），我们就可以**“对齐”**输入的英语单词和输出的法语单词了（参见[文章](https://arxiv.org/pdf/1409.0473.pdf)第六页）。关于Seq2Seq模型还有好多可以探讨的地方，比如编码器可以双向处理输入序列，限于篇幅，这里不再展开了。
