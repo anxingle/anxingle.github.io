@@ -38,60 +38,68 @@ NMT是最新的一种机器翻译模型（也就是将一个句子/短语从源�
 ### 定义输入，输出和掩码(masks)
 我们首先定义用于接受源语言句子单词(<font color=red size=5 face="斜体">enc_train_inputs</font> )和目标语言句子单词(<font color=red size=5 face="斜体">dec_train_inputs</font>)的placeholders。然后再为解码器定义掩码(<font color=red size=5 face="斜体">dec_label_masks</font>)在训练期间来屏蔽(mask out)真正的目标语句长度外的元素。这一步很重要，因为在处理一批数据的时候，需要填充(padding)一些特殊符号(比如</s>)来缩短句子，使一批数据内的所有句子有同样的长度（同样包括截断很长的句子）。
 
-> enc_train_inputs, dec_train_inputs = [],[]
->
-> """Defining unrolled training inputs for encoder"""
-> for ui in range(source_sequence_length):
-> ​    enc_train_inputs.append(tf.placeholder(tf.int32,  shape=[batch_size], name='enc_train_inputs_%d'%ui) )
-> dec_train_labels, dec_label_masks = [], []
-> """ Defining unrolled training inputs for decoder"""
-> for ui in range(target_sequence_length):
->    dec_train_inputs.append(tf.placeholder(tf.int32, shape=[batch_size], name='dec_train_inputs_%d'%ui))
->    dec_train_labels.append(tf.placeholder(tf.int32, shape=[batch_size], name='dec_train_outputs_%d'%ui))
->    dec_label_masks.append(tf.placeholder(tf.float32, shape=[batch_size], name='dec_label_masks_%d'%ui))
+```python
+enc_train_inputs, dec_train_inputs = [],[]
+
+"""Defining unrolled training inputs for encoder"""
+for ui in range(source_sequence_length):
+​    enc_train_inputs.append(tf.placeholder(tf.int32,  shape=[batch_size], name='enc_train_inputs_%d'%ui) )
+dec_train_labels, dec_label_masks = [], []
+""" Defining unrolled training inputs for decoder"""
+for ui in range(target_sequence_length):
+   dec_train_inputs.append(tf.placeholder(tf.int32, shape=[batch_size], name='dec_train_inputs_%d'%ui))
+   dec_train_labels.append(tf.placeholder(tf.int32, shape=[batch_size], name='dec_train_outputs_%d'%ui))
+   dec_label_masks.append(tf.placeholder(tf.float32, shape=[batch_size], name='dec_label_masks_%d'%ui))
+```
 
 ### 定义词嵌入相关操作
 现在定义词嵌入相关的操作。词嵌入操作是为了从<font color=red size=5 face="斜体">enc_train_inputs</font>和<font color=red size=5 face="斜体">dec_train_inputs</font>中获取对应的词向量。这里我已经提前做好了两种语言的词嵌入，这里用numpy矩阵来存储(de-embeddings.npy和en-embeddings.npy)。使用tf.convert_to_tensor操作便可以将数据以tensor的方式加载进入tensorflow。当然你也可以将encoder_emb_layer和decoder_emb_layer作为变量来初始化并结合起来训练。这也就是把tf.convert_to_tensor转为tf.Variable(...)。
 
 接下来我们查找(lookup)一批数据训练时用到的源语言词汇(<font color=red size=5 face="斜体">encoder_emb_inp</font>)和目标语言词汇(<font color=red size=5 face="斜体">decoder_emb_inp</font>)对应的词嵌入。<font color=red size=5 face="斜体">encoder_emb_inp</font>是元素为 tensor的 source_sequence_length的列表，tensor形状为[batch_size, embedding_size]。我们同样定义了名为 <font color=red size=5 face="斜体">enc_train_inp_lengths</font>的placeholder，其中包含了一批数据中每个句子的长度。稍后便会用到。最后tf.stack操作会堆叠(stack)所有列表中的元素并产生一个大小为[source_sequence_length, batch_size, embedding_size]的tensor。这是一个时间为主序列(time_major)的tensor。同样来定义<font color=red size=5 face="斜体">decoder_emb_inp</font>。
 
->  """Need to use pre-trained word embeddings"""
->  encoder_emb_layer = tf.convert_to_tensor(np.load('de-embeddings.npy'))
->  decoder_emb_layer = tf.convert_to_tensor(np.load('en-embeddings.npy'))
->
->  """looking up embeddings for encoder inputs"""
->  encoder_emb_inp = [tf.nn.embedding_lookup(encoder_emb_layer, src) for src in enc_train_inputs]
->  encoder_emb_inp = tf.stack(encoder_emb_inp)
->  
->  """looking up embeddings for decoder inputs"""
->  decoder_emb_inp = [tf.nn.embedding_lookup(decoder_emb_layer, src) for src in dec_train_inputs]
->  decoder_emb_inp = tf.stack(decoder_emb_inp)
->  
->  """ to contain the sentence length for each sentence in the batch"""
->  enc_train_inp_lengths = tf.placeholder(tf.int32, shape=[batch_size], name='train_input_lengths')
+```python
+"""Need to use pre-trained word embeddings"""
+encoder_emb_layer = tf.convert_to_tensor(np.load('de-embeddings.npy'))
+decoder_emb_layer = tf.convert_to_tensor(np.load('en-embeddings.npy'))
+
+"""looking up embeddings for encoder inputs"""
+encoder_emb_inp = [tf.nn.embedding_lookup(encoder_emb_layer, src) for src in enc_train_inputs]
+encoder_emb_inp = tf.stack(encoder_emb_inp)
+
+"""looking up embeddings for decoder inputs"""
+decoder_emb_inp = [tf.nn.embedding_lookup(decoder_emb_layer, src) for src in dec_train_inputs]
+decoder_emb_inp = tf.stack(decoder_emb_inp)
+
+""" to contain the sentence length for each sentence in the batch"""
+enc_train_inp_lengths = tf.placeholder(tf.int32, shape=[batch_size], name='train_input_lengths')
+```
 
 ### 定义编码器
 三行代码定义编码器！
-> encoder_cell = tf.nn.rnn_cell.BasicLSTMCell(num_units)
-> initial_state = encoder_cell.zero_state(batch_size, dtype=tf.float32)
-> encoder_outputs, encoder_state = tf.nn.dynamic_rnn(encoder_cell, encoder_emb_inp, initial_state=initial_state, sequence_length=enc_train_inp_lengths, time_major=True, swap_memory=True)
+```python
+encoder_cell = tf.nn.rnn_cell.BasicLSTMCell(num_units)
+initial_state = encoder_cell.zero_state(batch_size, dtype=tf.float32)
+encoder_outputs, encoder_state = tf.nn.dynamic_rnn(encoder_cell, encoder_emb_inp, initial_state=initial_state, sequence_length=enc_train_inp_lengths, time_major=True, swap_memory=True)
+```
 可见，定义解码器非常简单（除非你偏执地要进行性能优化而专注于具体实现细节）。我们首先定义encoder_cell，这里是使用"num_units个LSTM单元"作为编码器结构。如果想让LSTM网络更深一些的话，可以定义一个LSTM单元数组(an array of such cells)。之后初始化编码器状态为0。在第三行中的dynamic_rnn函数可以处理不定长结构的序列（完美契合我们的任务）。该函数使用<font color=red size=5 face="斜体"> encoder_cell</font>结构，使用 <font color=red size=5 face="斜体">enc_emb_inp</font> 作为结构的输入，每个序列的长度定义在enc_train_inp_lengths中。最后再说输入序列中的time_major和swap_memory问题（性能优化）。
 ### 定义解码器
->  decoder_cell = tf.nn.rnn_cell.BasicLSTMCell(num_units)
->  projection_layer = Dense(units=vocab_size, use_bias=True)
->  """ Helper"""
->  helper = tf.contrib.seq2seq.TrainingHelper(
->  ​        decoder_emb_inp, [tgt_max_sent_length-1 for _ in range(batch_size)], time_major=True)
->  """ Decoder"""
->  if decoder_type == 'basic':
->  ​    decoder = tf.contrib.seq2seq.BasicDecoder(
->  ​            decoder_cell, helper, encoder_state, output_layer=projection_layer)
->  elif decoder_type == 'attention':
->  ​    decoder = tf.contrib.seq2seq.BahdanauAttention(
->  ​            decoder_cell, helper, encoder_state, output_layer=projection_layer)
->  """ Dynamic decoding"""
->  outputs, _, _ = tf.contrib.seq2seq.dynamic_decode(
->  ​             decoder, output_time_major=True, swap_memory=True)
+```python
+decoder_cell = tf.nn.rnn_cell.BasicLSTMCell(num_units)
+projection_layer = Dense(units=vocab_size, use_bias=True)
+""" Helper"""
+helper = tf.contrib.seq2seq.TrainingHelper(
+​        decoder_emb_inp, [tgt_max_sent_length-1 for _ in range(batch_size)], time_major=True)
+""" Decoder"""
+if decoder_type == 'basic':
+​    decoder = tf.contrib.seq2seq.BasicDecoder(
+​            decoder_cell, helper, encoder_state, output_layer=projection_layer)
+elif decoder_type == 'attention':
+​    decoder = tf.contrib.seq2seq.BahdanauAttention(
+​            decoder_cell, helper, encoder_state, output_layer=projection_layer)
+""" Dynamic decoding"""
+outputs, _, _ = tf.contrib.seq2seq.dynamic_decode(
+​             decoder, output_time_major=True, swap_memory=True)
+```
 
 解码器需要的工作稍微有点多，但也不超过10行。首先定义<font color=red size=5 face="italic">decoder_cell</font>，然后是<font color=red size=5 face="斜体">projection_layer</font>，这就是softmax层，负责输出翻译后的one-hot-encoded词。定义的helper通过序列中的输入来迭代的产生输出(And we define a helper that iteratively produces in the inputs in the sequence)。之后定义最重要的部分—解码器。目前有很多种不同的解码结构供选择，参考[这里](https://www.tensorflow.org/api_docs/python/tf/contrib/seq2seq/Decoder)。示例中提供了两种不同的解码器。解码器部分的意思：
 
@@ -111,28 +119,34 @@ NMT是最新的一种机器翻译模型（也就是将一个句子/短语从源�
 最后，我们使用<font color=red size=5 face="italic">dynamic_decode</font>来从<font color=red size=5 face="italic">projection_layer</font>中解码翻译并得到输出。<font color=red size=5 face="italic">output_time_major</font>选项说明输出是以时间为主轴。
 ### 定义Loss
 既然已经知道了输入，真实标签，预测标签，那么便可定义loss了。
->  logits = outputs.rnn_output
->  crossent = tf.nn.sparse_softmax_cross_entropy_with_logits(
->  ​         labels=dec_train_labels, logits=logits)
->  loss = (tf.reduce_sum(
->  ​       crossent*tf.stack(dec_label_masks)) / (batch_size*target_sequence_length ) )
+```python
+logits = outputs.rnn_output
+crossent = tf.nn.sparse_softmax_cross_entropy_with_logits(
+​         labels=dec_train_labels, logits=logits)
+loss = (tf.reduce_sum(
+​       crossent*tf.stack(dec_label_masks)) / (batch_size*target_sequence_length ) )
+```
 注意我们如何使用<font color=red size=5 face="italic">dec_label_masks</font>来遮掩(mask out)loss中不想要的标签。这是非必须的。
 ### 得到预测
-> train_prediction = outputs.sample_id
+```python
+train_prediction = outputs.sample_id
+```
 这行很简单。
 ### 优化器
->  with tf.variable_scope('Adam'):
->  ​    adam_optimizer = tf.train.AdamOptimizer(learning_rate)
->  adam_gradients, v = zip(*adam_optimizer.compute_gradients(loss))
->  adam_gradients, _ = tf.clip_by_global_norm(adam_gradients, 25.0)
->  adam_optimize = adam_optimizer.apply_gradients(zip(adam_gradients, v))
->  
->  with tf.variable_scope('SGD'):
->  ​    sgd_optimizer = tf.train.GradientDescentOptimizer(learning_rate)
->  ​    
->  sgd_gradients, v = zip(*sgd_optimer.compute_gradients(loss) )
->  sgd_gradients, _ = tf.clip_by_global_norm(sgd_gradients, 25.0)
->  sgd_optimize = sgd_optimizer.apply_gradients(zip(sgd_gradients, v))
+```python
+with tf.variable_scope('Adam'):
+​    adam_optimizer = tf.train.AdamOptimizer(learning_rate)
+adam_gradients, v = zip(*adam_optimizer.compute_gradients(loss))
+adam_gradients, _ = tf.clip_by_global_norm(adam_gradients, 25.0)
+adam_optimize = adam_optimizer.apply_gradients(zip(adam_gradients, v))
+
+with tf.variable_scope('SGD'):
+​    sgd_optimizer = tf.train.GradientDescentOptimizer(learning_rate)
+​    
+sgd_gradients, v = zip(*sgd_optimer.compute_gradients(loss) )
+sgd_gradients, _ = tf.clip_by_global_norm(sgd_gradients, 25.0)
+sgd_optimize = sgd_optimizer.apply_gradients(zip(sgd_gradients, v))
+```
 
 起始阶段使用Adam优化器（比如，前10000次使用Adam），之后转为SGD。之所以这么做是因为如果一直使用Adam优化器的话会出现奇怪的结果。梯度裁剪可以避免出现梯度爆炸。
 ### 真正的翻译任务：德语到英语
