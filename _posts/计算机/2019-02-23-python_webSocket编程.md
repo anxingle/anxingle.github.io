@@ -232,3 +232,6 @@ $ . venv/bin/activate
 **更新：** Flask-SocketIO 0.3增加了room。这可以让链接对象不必使用广播选项来发送信息给每一个人。 
 
 **更新2：** Flask-SocketIO 1.0 增加了Python3.3的支持，而且提供了服务端选择gevent或eventlet的选项，如同标准Flask服务。 
+
+**全文翻译自[博客](https://blog.miguelgrinberg.com/post/easy-websockets-with-flask-and-gevent)**
+
