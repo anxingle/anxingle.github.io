@@ -7,11 +7,17 @@ keywords: python webSocketIO
 description: 
 ---
 
+经常使用HTTP协议来进行网络编程，最近需要服务器主动向客户端发起通信请求，传统的HTTP协议显得捉襟见肘---AJAX轮询来和服务端交互实在太丑太low。于是着手研究WebSocket协议（是的，以前都是简单GET,POST了事😓）。
+
+可惜这方面python的入门资料不是很多，选择无非就是[Django](https://www.fullstackpython.com/django.html)，[Flask](http://flask.pocoo.org/) 和[tornado](http://www.tornadoweb.org/en/stable/websocket.html) 等几个。以前使用Flask较多，为能减小学习成本，也尽可能兼容以前HTTP协议的应用，我选择了Flask-SocketIO。可惜这方面文档不是很多，于是就翻译了下面这篇文章：
+
+**以下全文翻译自**[**博客**](https://blog.miguelgrinberg.com/post/easy-websockets-with-flask-and-gevent)
+
 这个周末我决定忙中偷闲，给自己放个小假，先不写[这本书](http://flaskbook.com/)了。花时间好好做一个想了很久的项目。这个项目是一个全新的Flask扩展，我觉得很酷。 
 
 很高兴介绍[Flask-SocketIO](https://github.com/miguelgrinberg/Flask-SocketIO),简单易用的WebSocket通信在Flask上的扩展。 
 
-\## 什么是WebSocket？ 
+## 什么是WebSocket？ 
 
 [WebSocket](http://en.wikipedia.org/wiki/WebSocket)是HTML5中引入的新的通信协议。主要被网络客户端与服务端实现，所以也可以在web外使用。 
 
@@ -29,13 +35,13 @@ description:
 
 \* Internet Explorer 10 
 
-\## 什么是SocketIO？ 
+## 什么是SocketIO？ 
 
 [SocketIO](http://socket.io/)是一个跨浏览器JavaScript库，它抽象了真正的交换协议中的客户端应用。对于现代浏览器，SocketIO使用WebSocket协议，但是对于不支持WebSocket的老旧的浏览器，SocketIO使用其他对两端都何时的较老的解决方案来仿真模拟连接。 
 
 重要的是所有的应用实例中它都提供相同的接口。不同的连接机制被抽象成通用API，所以使用SocketIO你可以相当确定任何浏览器可以连接到你的应用，而且是最高效适合这个浏览器的方法。 
 
-\## Flask-Sockets呢? 
+## Flask-Sockets呢? 
 
 前一段时间Kenneth Reitz发布了Flask-Sockets---另一个Flask扩展，这可以让Flask应用使用WebSocket协议。 
 
@@ -45,69 +51,49 @@ Flask-Sockets和Flask-SocketIO之间最大的区别是前者包装了原始WebSo
 
 Flask-SocketIO也创建了事件处理环境，that is close to that of regular view functions, including the creation of application and request contexts.There are some important exceptions to this explained in the documentation, however. 
 
-\## Flask-SocketIO服务端 
+## Flask-SocketIO服务端 
 
 安装Flask-Sockets很容易： 
 
-\```pytohn 
-
+```
 $ pip install flask-socketio 
-
-\``` 
-
-Below is an example Flask application that implements Flask-SocketIO: 
+```
 
 注意Flask-SocketIO依赖gevent库，目前它仅可以在python2上运行（译者注：python3.6测试也可以）。gevent很快也会对python3支持。 
 
 下面是一个Flask-SocketIO在Flask应用上的实现例子： 
 
-\```python 
-
+```
 from flask import Flask, render_template 
-
 from flask_socketio import SocketIO, emit 
 
-app = Flask(__name__) 
-
+app = Flask(name) 
 app.config['SECRET_KEY'] = 'secret!' 
-
 socketio = SocketIO(app) 
 
 @app.route('/') 
-
 def index(): 
-
-return render_template('index.html') 
+    return render_template('index.html') 
 
 @socketio.on('my event', namespace='/test') 
-
 def test_message(message): 
-
-emit('my response', {'data': message['data']}) 
+    emit('my response', {'data': message['data']}) 
 
 @socketio.on('my broadcast event', namespace='/test') 
-
 def test_message(message): 
-
-emit('my response', {'data': message['data']}, broadcast=True) 
+    emit('my response', {'data': message['data']}, broadcast=True) 
 
 @socketio.on('connect', namespace='/test') 
-
 def test_connect(): 
-
-emit('my response', {'data': 'Connected'}) 
+    emit('my response', {'data': 'Connected'}) 
 
 @socketio.on('disconnect', namespace='/test') 
-
 def test_disconnect(): 
+    print('Client disconnected') 
 
-print('Client disconnected') 
-
-if __name__ == '__main__': 
-
-socketio.run(app) 
-
-\``` 
+if name == 'main': 
+    socketio.run(app) 
+```
 
 这个扩展使用常用方法来初始化。扩展提供了 **run()** 方法来简化服务的启动。 
 
@@ -123,41 +109,29 @@ socketio.run(app)
 
 Flask服务端可以用Flask-SocketIO提供的**send()** 和 **emit()** 发送events。**send()** 发送标准字符串或JSON信息给客户端，**emit()** 在定制event名称下发送信息。默认信息被发送到连接的客户端上，但当可选参数**broadcast**设置为True的时候，所有namespace下连接的客户端都会收到信息。 
 
-\## SocketIO 客户端 
+## SocketIO 客户端 
 
 准备好试试Javascript? 例子服务器中使用的index.html包含一些使用jQuery和SocketIO的客户端应用。相关代码如下: 
 
-\```JavaScript 
-
+```
 $(document).ready(function(){ 
+     var socket = io.connect('http://' + document.domain + ':' + location.port + '/test'); 
+         socket.on('my response', function(msg) { 
+             $('#log').append('<p>Received: ' + msg.data + '</p>'); 
+    }); 
+    
+    $('form#emit').submit(function(event) { 
+        socket.emit('my event', {data: $('#emit_data').val()}); 
+        return false; 
+    }); 
 
-var socket = io.connect('http://' + document.domain + ':' + location.port + '/test'); 
+    $('form#broadcast').submit(function(event) { 
+        socket.emit('my broadcast event', {data:$('#broadcast_data').val()}); 
+        return false; 
+    }); 
 
-socket.on('my response', function(msg) { 
-
-$('#log').append('<p>Received: ' + msg.data + '</p>'); 
-
-}); 
-
-$('form#emit').submit(function(event) { 
-
-socket.emit('my event', {data: $('#emit_data').val()}); 
-
-return false; 
-
-}); 
-
-$('form#broadcast').submit(function(event) { 
-
-socket.emit('my broadcast event', {data:$('#broadcast_data').val()}); 
-
-return false; 
-
-}); 
-
-}); 
-
-\``` 
+});  
+```
 
 **socket**变量在SocketIO连接到服务器中初始化。注意 **\/test** namespace是如何在连接URL中指定的。如果不使用namespace来连接，直接使用不带任何参数的 **io.connect()** 就已经够了。 
 
@@ -173,7 +147,7 @@ id为**broadcast**的第二个表单也做了同样的事情。不同的是在�
 
 你可以在[github repo](https://github.com/miguelgrinberg/Flask-SocketIO/blob/master/example/templates/index.html)中看到整个HTML文档。 
 
-\## 运行例子 
+## 运行例子 
 
 你需要先从github下载整个代码库来运行。你有两个选择来下载： 
 
@@ -185,33 +159,28 @@ id为**broadcast**的第二个表单也做了同样的事情。不同的是在�
 
 为保持系统的python解释器干净(译者：看自己选择吧)，可以创建虚拟环境来工作。 
 
-\```shell 
-
+```
 $ virtualenv venv 
-
 $ . venv/bin/activate 
-
-\``` 
+```
 
 之后你需要安装依赖: 
 
-\```shell 
-
+```
 (venv) $ pip install -r requirements.txt 
-
-\``` 
+```
 
 最后直接运行： 
 
-\```shell 
+```
+(venv) $ python app.py  
+```
 
-(venv) $ python app.py 
+现在打开浏览器，直接打开[**http://localhost:5000**](http://localhost:5000/)你就会得到如下所示的页面： 
 
-\``` 
 
-现在打开浏览器，直接打开**http://localhost:5000**你就会得到如下所示的页面： 
 
-![](https://raw.githubusercontent.com/anxingle/anxingle.github.io/master/public/img/cs/flask-socketio.png?raw=true) 
+![img](https://pic1.zhimg.com/v2-df1ffddc85698020b185558535635634_b.png)
 
 上面两个文本框中的文本将会通过SocketIO连接发送给服务端，服务端会直接再把它返回给客户端，客户端会把信息添加在页面的"Receive"部分。在"Receive"部分可以看到服务端通过**connect**事件发送的信息。 
 
@@ -221,7 +190,7 @@ $ . venv/bin/activate
 
 如果客户端断开连接（比如你关掉了浏览器页面），服务端在几秒后会检测到，并会发送一个disconnect 事件给应用。终端会打印出这个信息。 
 
-\## 最后几句话 
+## 最后 
 
 本扩展的更多解释去哪个参阅[文档](http://flask-socketio.readthedocs.org/en/latest/)。如果有意的话可以fork后提交代码。 
 
@@ -233,5 +202,5 @@ $ . venv/bin/activate
 
 **更新2：** Flask-SocketIO 1.0 增加了Python3.3的支持，而且提供了服务端选择gevent或eventlet的选项，如同标准Flask服务。 
 
-**全文翻译自[博客](https://blog.miguelgrinberg.com/post/easy-websockets-with-flask-and-gevent)**
+**全文翻译自**[**博客**](https://blog.miguelgrinberg.com/post/easy-websockets-with-flask-and-gevent)
 
