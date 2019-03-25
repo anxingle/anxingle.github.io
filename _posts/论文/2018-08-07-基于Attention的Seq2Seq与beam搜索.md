@@ -42,13 +42,15 @@ Seq2Seq模型依赖于encoder-decoder结构。Encoder端对输入序列编码，
 $$
 h_{0} = LSTM(e, w_{sos})
 $$
+
 ,
 
 $$
 s_{0} = g(h{_0})
 $$
-,
 
+,
+     
 $$
 p_{0} = softmax(s_{0})
 $$
