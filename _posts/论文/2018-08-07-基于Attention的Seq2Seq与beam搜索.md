@@ -75,10 +75,11 @@ $$
 p_{1} = softmax(s_{1})
 $$
 ,
-
 $$
 i_{1} = argmax(p_{1})
 $$
+,
+
 
 当解码器遇到特殊停止符（往往是"<eos>"）的时候，解码过程就会停止。
 <img src="https://raw.githubusercontent.com/anxingle/Exam/master/pic/seq2seq/seq2seq_vanilla_decoder-2.png" width="550px" />
@@ -119,6 +120,8 @@ $$
 $$
 i_{t} = argmax(p_{t})
 $$
+,
+
 向量 $c_{t}$ 就是注意力（或称上下文）向量。每一步**解码**的过程计算一个新的注意力向量。首先，使用函数$f(h_{t-1}, e_{e_{t^{old}}})\Rightarrow \alpha_{t_{old}} \in R$ 计算**编码器**每一个隐藏层状态$e_{t_{old}}$ 的分数；之后使用softmax正则化$\alpha_{t_{old}}$，然后与$e_{t_{old}}$ 加权计算$c_{t}$:
 $$
 \alpha_{t_{old}} = f(h_{t-1}, e_{t_{old}})
@@ -133,6 +136,8 @@ $$
 $$
 c_{t} = \sum_{t_{old}=0}^n\overline{\alpha}_{t_{old}}{e_{t_{old}}}
 $$
+,
+
 
 <img src="https://raw.githubusercontent.com/anxingle/Exam/master/pic/seq2seq/seq2seq_attention_mechanism_new.png" width="700px" />
 
