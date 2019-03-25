@@ -65,20 +65,25 @@ $$
 $$
 h_{1} = LSTM(h_{0}, w_{i_{0}})
 $$
+
 ,
 
 $$
 s_{1} = g(h{_1})
 $$
+
 ,
 
 $$
 p_{1} = softmax(s_{1})
 $$
+
 ,
+
 $$
 i_{1} = argmax(p_{1})
 $$
+
 ,
 
 
@@ -106,46 +111,57 @@ $$
 $$
 h_{t} = LSTM(h_{t-1}, [w_{i_{t-1}}, c_{t}])
 $$
+
 ,
 
 $$
 s_{t} = g(h_{t})
 $$
+
 ,
 
 $$
 p_{t} = softmax(s_{t})
 $$
+
 ,
 
 $$
 i_{t} = argmax(p_{t})
 $$
+
 ,
+
 
 向量 $c_{t}$ 就是注意力（或称上下文）向量。每一步**解码**的过程计算一个新的注意力向量。首先，使用函数$f(h_{t-1}, e_{e_{t^{old}}})\Rightarrow \alpha_{t_{old}} \in R$ 计算**编码器**每一个隐藏层状态$e_{t_{old}}$ 的分数；之后使用softmax正则化$\alpha_{t_{old}}$，然后与$e_{t_{old}}$ 加权计算$c_{t}$:
 $$
 \alpha_{t_{old}} = f(h_{t-1}, e_{t_{old}})
 $$
+
 ,
 
 $$
 \overline{\alpha} = softmax(\alpha)
 $$
+
 ,
 
 $$
 c_{t} = \sum_{t_{old}=0}^n\overline{\alpha}_{t_{old}}{e_{t_{old}}}
 $$
-,
 
+,
 
 <img src="https://raw.githubusercontent.com/anxingle/Exam/master/pic/seq2seq/seq2seq_attention_mechanism_new.png" width="700px" />
 
 在这里，计算注意力向量$\alpha_{t_{old}}$ 的函数$f$那可就多啦，一般也就下面几种：
-<img src="https://latex.codecogs.com/png.latex?\LARGE&space;&space;f(h_{t-1},&space;e_{t_{old}})&space;=&space;\begin{cases}&space;h^{T}_{t-1}&space;e_{t_{old}}&space;&\text{dot}\\&space;h^{T}_{t-1}&space;W&space;e_{t_{old}}&space;&\text{general}&space;\\&space;v^{T}tanh(W[h_{t-1},e_{t_{old}}])&space;&\text{concat}&space;\end{cases}&space;" title="\LARGE  f(h_{t-1}, e_{t_{old}}) = \begin{cases} h^{T}_{t-1} e_{t_{old}} &\text{dot}\\ h^{T}_{t-1} W e_{t_{old}} &\text{general} \\ v^{T}tanh(W[h_{t-1},e_{t_{old}}]) &\text{concat} \end{cases} " />
-，          
 
+$$
+f(h_{t-1},e_{t_{old}})=\begin{cases}h^{T}_{t-1}e_{t_{old}}&\text{dot}\\h^{T}_{t-1}We_{t_{old}}&\text{general}\\v^{T}tanh(W[h_{t-1},e_{t_{old}}])&\text{concat}\end{cases}
+
+$$
+
+,
 
 
 这样子注意力权重$\overline{\alpha}$ 很容易解释了。当产生单词**vas**的时候（对应英语**are**），我们期望$\overline{\alpha}_{are}$ 接近1，而$\overline{\alpha}_{how}$和$\overline{\alpha}_{you}$接近0。直觉上注意力向量$c$大致接近**are**的隐含层向量，它有助于产生法语单词**vas**。
@@ -169,6 +185,10 @@ $$
 -\log P(y_{1},...,y_{m}) = -\log \prod\limits_{i=1}^m p_{i}[y_{i}]\\
                                           = -\sum_{i=1}^{n}\log p_{i}[y_{i}]
 $$
+
+,
+
+
 在我们这个例子中，也就等于
 $$
 -\log p_{1}[comment]-\log p_{2}[vas]-\log p_{3}[tu]-\log p_{4}[<eos>]
