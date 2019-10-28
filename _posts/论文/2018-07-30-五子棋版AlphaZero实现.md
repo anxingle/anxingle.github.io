@@ -17,6 +17,8 @@ AlphaGo出来之后，对它的解读一直不断，而AlphaGo Zero和AlphaZero�
 
 
 ![蒙特卡洛树](https://raw.githubusercontent.com/anxingle/Exam/master/pic/alphaPig/UCT.png)
+![蒙特卡洛树](/img/ML/UCT.png)
+
 
 ## MCTS（蒙特卡洛树搜索）
 
