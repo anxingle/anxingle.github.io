@@ -8,6 +8,7 @@ description:
 ---
 
 <img src="https://raw.githubusercontent.com/anxingle/Exam/master/pic/alphaPig/alphaZero.jpg" height="200px"/>
+![](/img/ML/alphaZero.jpg)
 
 
 
