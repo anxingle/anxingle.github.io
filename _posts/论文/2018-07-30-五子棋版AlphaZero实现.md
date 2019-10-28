@@ -8,7 +8,7 @@ description:
 ---
 
 <img src="https://raw.githubusercontent.com/anxingle/Exam/master/pic/alphaPig/alphaZero.jpg" height="200px"/>
-![](/img/ML/alphaZero.jpg)
+![](/public/img/ML/alphaZero.jpg)
 
 
 
@@ -17,7 +17,7 @@ AlphaGo出来之后，对它的解读一直不断，而AlphaGo Zero和AlphaZero�
 
 
 ![蒙特卡洛树](https://raw.githubusercontent.com/anxingle/Exam/master/pic/alphaPig/UCT.png)
-![蒙特卡洛树](/img/ML/UCT.png)
+![蒙特卡洛树](/public/img/ML/UCT.png)
 
 
 ## MCTS（蒙特卡洛树搜索）
