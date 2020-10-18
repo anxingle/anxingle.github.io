@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Attention is all you need---可视化理解Transformer结构
-category: 论文
+category: 科研
 tags: 计算机
 keywords: 
 description: 

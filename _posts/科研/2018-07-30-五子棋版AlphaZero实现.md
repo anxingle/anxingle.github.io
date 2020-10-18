@@ -1,7 +1,7 @@
 ---
 layout: post
 title: AlphaPig-五子棋版AlphaZero的实现
-category: 论文
+category: 科研
 tags: 计算机
 keywords: 
 description: 

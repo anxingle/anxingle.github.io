@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 自然语言翻译
-category: 计算机
+category: 科研
 tags: 深度学习
 keywords: 
 description: 

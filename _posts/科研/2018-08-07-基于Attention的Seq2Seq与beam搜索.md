@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 基于Attention的Seq2Seq与Beam搜索
-category: 论文
+category: 科研
 tags: 计算机
 keywords: 
 description: 

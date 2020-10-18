@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 基于Seq2Seq的图像latex生成
-category: 论文
+category: 科研
 tags: 计算机
 keywords: 
 description: 
