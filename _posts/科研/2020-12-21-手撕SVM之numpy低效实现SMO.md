@@ -19,7 +19,8 @@ description: 面试遇到过的问题
 
 这时候，我们需要求解一系列的<a href="https://www.codecogs.com/eqnedit.php?latex=\large&space;\alpha_{1},\alpha_{2},\alpha_{3}..." target="_blank"><img src="https://latex.codecogs.com/png.latex?\large&space;\alpha_{1},\alpha_{2},\alpha_{3}..." title="\large \alpha_{1},\alpha_{2},\alpha_{3}..." /></a>值了，只要得到了 <a href="https://www.codecogs.com/eqnedit.php?latex=\large&space;\alpha_{1}" target="_blank"><img src="https://latex.codecogs.com/png.latex?\large&space;\alpha_{1}" title="\large \alpha_{1}" /></a>的值，那么W,b 就好求了。[《西瓜书》](https://book.douban.com/subject/26708119/)上也就到了这里，告诉我们这是一个二次规划问题（这我也不会啊😭）。顺理成章地引入了 SMO 算法来求解<a href="https://www.codecogs.com/eqnedit.php?latex=\large&space;\alpha_{1}" target="_blank"><img src="https://latex.codecogs.com/png.latex?\large&space;\alpha_{1}" title="\large \alpha_{1}" /></a>，得到了<a href="https://www.codecogs.com/eqnedit.php?latex=\large&space;\alpha_{1}" target="_blank"><img src="https://latex.codecogs.com/png.latex?\large&space;\alpha_{1}" title="\large \alpha_{1}" /></a>后，对W,b进行更新迭代：
 
-<p><center><img src="https://latex.codecogs.com/png.latex?\dpi{120}&space;\large&space;\large&space;\begin{aligned}W=\sum_{i=1}^{n}{\alpha_{i}}{y_{i}}{x_{i}},\\&space;\sum_{i=1}^{n}{{\alpha_{i}}{y_{i}}}=0\end{aligned}" title="\large \large \begin{aligned}W=\sum_{i=1}^{n}{\alpha_{i}}{y_{i}}{x_{i}},\\ \sum_{i=1}^{n}{{\alpha_{i}}{y_{i}}}=0\end{aligned}" /></center></p>
+![](https://github.com/anxingle/anxingle.github.io/blob/master/public/img/ML/svm_latex.png?raw=true)
+
 
 即可求出超分类面，也就是分类函数:
 
@@ -28,10 +29,10 @@ description: 面试遇到过的问题
 
 我们回过头来继续看SMO算法如何来求解的<a href="https://www.codecogs.com/eqnedit.php?latex=\large&space;\alpha_{1,2,3...}" target="_blank"><img src="https://latex.codecogs.com/png.latex?\large&space;\alpha_{1,2,3...}" title="\large \alpha_{1,2,3...}" /></a> ，实际上这里我也不能明白SMO的精髓，只能按着 [wikipedia SMO序列最小优化算法](https://zh.wikipedia.org/wiki/序列最小优化算法中)  介绍的的流程来进行计算了😏。
 
-![](https://github.com/anxingle/anxingle.github.io/blob/master/public/img/ML/smo.jpeg)
+![](https://github.com/anxingle/anxingle.github.io/blob/master/public/img/ML/smo.jpeg?raw=true)
 
 其中，$L$和$H$分别是$\alpha_{2}^{new}$ 的下界和上界。特别地，有：
-![](https://github.com/anxingle/anxingle.github.io/blob/master/public/img/ML/smo2.jpeg)
+![](https://github.com/anxingle/anxingle.github.io/blob/master/public/img/ML/smo2.jpeg?raw=true)
 
 推导过程实在繁琐，我们这里直接拿作者的解析解：
 
@@ -60,11 +61,11 @@ description: 面试遇到过的问题
 
 看看Platt的原文提供的伪代码：
 
-![](https://github.com/anxingle/anxingle.github.io/blob/master/public/img/ML/smo_0.jpeg)
+![](https://github.com/anxingle/anxingle.github.io/blob/master/public/img/ML/smo_0.jpeg?raw=true)
 
-![](https://github.com/anxingle/anxingle.github.io/blob/master/public/img/ML/smo_1.jpeg)
+![](https://github.com/anxingle/anxingle.github.io/blob/master/public/img/ML/smo_1.jpeg?raw=true)
 
-![](https://github.com/anxingle/anxingle.github.io/blob/master/public/img/ML/smo_2.jpeg)
+![](https://github.com/anxingle/anxingle.github.io/blob/master/public/img/ML/smo_2.jpeg?raw=true)
 
 我们
 
