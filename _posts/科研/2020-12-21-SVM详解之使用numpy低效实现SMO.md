@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 手撕SVM代码之numpy低效实现SMO算法
+title: SVM详解之使用numpy低效实现SMO算法
 category: 科研
 tags: 机器学习
 keywords: 机器学习,SVM
