@@ -7,7 +7,7 @@ keywords: 机器学习,SVM
 description: 面试遇到过的问题
 ---
 
-(本文使用https://www.codecogs.com/进行latex渲染，若latex公式有问题，请开启全局梯子)
+**(本文使用https://www.codecogs.com/进行latex渲染，若latex公式有问题，请开启全局梯子)**
 
 一直以来SVM都停留在一看就大概知道，一上手推导就傻眼的阶段。实际上还是没有真正地理解了SVM的精髓，对于 **关键定理** 这里总是囫囵吞枣。看一看网上大部分的教程，也都是以推导为主，所以想手写实现一下，加深理解。
 
@@ -60,6 +60,6 @@ description: 面试遇到过的问题
 
 <p><center><a href="https://www.codecogs.com/eqnedit.php?latex=\large&space;\alpha_{1}^{new}=\alpha_{1}^{old}&space;&plus;&space;y_{1}y_{2}(\alpha_{2}^{old}-\alpha_{2}^{new})" target="_blank"><img src="https://latex.codecogs.com/png.latex?\large&space;\alpha_{1}^{new}=\alpha_{1}^{old}&space;&plus;&space;y_{1}y_{2}(\alpha_{2}^{old}-\alpha_{2}^{new})" title="\large \alpha_{1}^{new}=\alpha_{1}^{old} + y_{1}y_{2}(\alpha_{2}^{old}-\alpha_{2}^{new})" /></a></center></p>然后循环对所有的<a href="https://www.codecogs.com/eqnedit.php?latex=\large&space;\alpha_{i}" target="_blank"><img src="https://latex.codecogs.com/png.latex?\large&space;\alpha_{i}" title="\large \alpha_{i}" /></a>进行选取，便可以进行优化更新了。
 
-根据Platt的原文提供的伪代码，我们有如下实现：
+根据Platt的原文提供的伪代码，我们有如下实现(**PC或MAC下加载以下代码展示**)：
 
 <script src="https://gist.github.com/anxingle/d5b9084cdfd27ed42a92ebb8b1674959.js"></script>
