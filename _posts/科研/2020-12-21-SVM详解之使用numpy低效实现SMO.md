@@ -27,7 +27,7 @@ description: 面试遇到过的问题
 <p><center><a href="https://www.codecogs.com/eqnedit.php?latex=\large&space;f(x)=W^Tx&plus;b&space;=&space;\sum_{i=1}^m\alpha_{i}y_{i}x_{i}^T&plus;b" target="_blank"><img src="https://latex.codecogs.com/png.latex?\large&space;f(x)=W^Tx&plus;b&space;=&space;\sum_{i=1}^m\alpha_{i}y_{i}x_{i}^T&plus;b" title="\large f(x)=W^Tx+b = \sum_{i=1}^m\alpha_{i}y_{i}x_{i}^T+b" /></a></center></p>
 这是基本的SVM推导，如果这一步还不知道怎么来的，那就需要拿[《西瓜书》](https://book.douban.com/subject/26708119/)好好推导一下了。
 
-<object width="100%" height="650" type="application/pdf" data="https://raw.githubusercontent.com/anxingle/Exam/dac71b6b54ac42b41cc76cb8996c030d18f58c26/pic/SMO.pdf#zoom=85&scrollbar=0&toolbar=0&navpanes=0" id="pdf_content" style="pointer-events: none;"></object>
+<object width="100%" height="350" type="application/pdf" data="https://raw.githubusercontent.com/anxingle/Exam/dac71b6b54ac42b41cc76cb8996c030d18f58c26/pic/SMO.pdf#zoom=85&scrollbar=0&toolbar=0&navpanes=0" id="pdf_content" style="pointer-events: none;"></object>
 我们回过头来继续看SMO算法如何来求解的<a href="https://www.codecogs.com/eqnedit.php?latex=\large&space;\alpha_{1,2,3...}" target="_blank"><img src="https://latex.codecogs.com/png.latex?\large&space;\alpha_{1,2,3...}" title="\large \alpha_{1,2,3...}" /></a> ，实际上这里我也不能明白SMO的精髓，只能按着 [wikipedia SMO序列最小优化算法](https://zh.wikipedia.org/wiki/序列最小优化算法中)  介绍的的流程来进行计算了😏。
 
 ![](https://github.com/anxingle/anxingle.github.io/blob/master/public/img/ML/smo.jpeg?raw=true)
