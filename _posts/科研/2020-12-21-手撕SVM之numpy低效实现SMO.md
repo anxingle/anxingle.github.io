@@ -7,7 +7,7 @@ keywords: 机器学习,SVM
 description: 面试遇到过的问题
 ---
 
-
+(本文使用https://www.codecogs.com/进行latex渲染，若latex公式有问题，请开启全局梯子)
 
 一直以来SVM都停留在一看就大概知道，一上手推导就傻眼的阶段。实际上还是没有真正地理解了SVM的精髓，对于 **关键定理** 这里总是囫囵吞枣。看一看网上大部分的教程，也都是以推导为主，所以想手写实现一下，加深理解。
 
@@ -19,7 +19,7 @@ description: 面试遇到过的问题
 
 这时候，我们需要求解一系列的<a href="https://www.codecogs.com/eqnedit.php?latex=\large&space;\alpha_{1},\alpha_{2},\alpha_{3}..." target="_blank"><img src="https://latex.codecogs.com/png.latex?\large&space;\alpha_{1},\alpha_{2},\alpha_{3}..." title="\large \alpha_{1},\alpha_{2},\alpha_{3}..." /></a>值了，只要得到了 <a href="https://www.codecogs.com/eqnedit.php?latex=\large&space;\alpha_{1}" target="_blank"><img src="https://latex.codecogs.com/png.latex?\large&space;\alpha_{1}" title="\large \alpha_{1}" /></a>的值，那么W,b 就好求了。[《西瓜书》](https://book.douban.com/subject/26708119/)上也就到了这里，告诉我们这是一个二次规划问题（这我也不会啊😭）。顺理成章地引入了 SMO 算法来求解<a href="https://www.codecogs.com/eqnedit.php?latex=\large&space;\alpha_{1}" target="_blank"><img src="https://latex.codecogs.com/png.latex?\large&space;\alpha_{1}" title="\large \alpha_{1}" /></a>，得到了<a href="https://www.codecogs.com/eqnedit.php?latex=\large&space;\alpha_{1}" target="_blank"><img src="https://latex.codecogs.com/png.latex?\large&space;\alpha_{1}" title="\large \alpha_{1}" /></a>后，对W,b进行更新迭代：
 
-<p><center><a href="https://www.codecogs.com/eqnedit.php?latex=\large&space;\begin{flushleft}&space;W=\sum_{i=1}^{n}{\alpha_{i}}&space;{y_{i}}&space;{x_{i}},\\&space;\sum_{i=1}^{n}{{\alpha_{i}}&space;{y_{i}}}&space;=&space;0&space;\end{flushleft}" target="_blank"><img src="https://latex.codecogs.com/png.latex?\large&space;\begin{flushleft}&space;W=\sum_{i=1}^{n}{\alpha_{i}}&space;{y_{i}}&space;{x_{i}},\\&space;\sum_{i=1}^{n}{{\alpha_{i}}&space;{y_{i}}}&space;=&space;0&space;\end{flushleft}" title="\large \begin{flushleft} W=\sum_{i=1}^{n}{\alpha_{i}} {y_{i}} {x_{i}},\\ \sum_{i=1}^{n}{{\alpha_{i}} {y_{i}}} = 0 \end{flushleft}" /></a></center></p>
+<p><center><a href="https://www.codecogs.com/eqnedit.php?latex=\large&space;\begin{aligned}W=\sum_{i=1}^{n}{\alpha_{i}}{y_{i}}{x_{i}},\\&space;\sum_{i=1}^{n}{{\alpha_{i}}{y_{i}}}=0\end{aligned}" target="_blank"><img src="https://latex.codecogs.com/png.latex?\large&space;\begin{aligned}W=\sum_{i=1}^{n}{\alpha_{i}}{y_{i}}{x_{i}},\\&space;\sum_{i=1}^{n}{{\alpha_{i}}{y_{i}}}=0\end{aligned}" title="\large \begin{aligned}W=\sum_{i=1}^{n}{\alpha_{i}}{y_{i}}{x_{i}},\\ \sum_{i=1}^{n}{{\alpha_{i}}{y_{i}}}=0\end{aligned}" /></a></center></p>
 
 即可求出超分类面，也就是分类函数:
 
@@ -68,3 +68,7 @@ description: 面试遇到过的问题
 
 我们
 
+$$
+W=\sum_{i=1}^{n}{\alpha_{i}}{y_{i}}{x_{i}},\\
+\sum_{i=1}^{n}{{\alpha_{i}}{y_{i}}}=0
+$$
