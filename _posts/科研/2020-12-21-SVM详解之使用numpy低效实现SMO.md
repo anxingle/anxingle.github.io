@@ -17,7 +17,7 @@ description: 面试遇到过的问题
 
 <p><center><a href="https://www.codecogs.com/eqnedit.php?latex=\large&space;argmax\sum_{i=1}^n{\alpha_{i}}-\frac{1}{2}{\sum_{i=1}^{n}}{\sum_{j=1}^{n}}y_{i}y_{j}\alpha_{i}\alpha_{j}\left&space;\langle&space;x_{i},x_{j}&space;\right&space;\rangle\\&space;s.t.&space;\alpha_{i}\geq0,&space;\sum_{i=1}^{N}\alpha_{i}y_{i}=0" target="_blank"><img src="https://latex.codecogs.com/png.latex?\large&space;argmax\sum_{i=1}^n{\alpha_{i}}-\frac{1}{2}{\sum_{i=1}^{n}}{\sum_{j=1}^{n}}y_{i}y_{j}\alpha_{i}\alpha_{j}\left&space;\langle&space;x_{i},x_{j}&space;\right&space;\rangle\\&space;s.t.&space;\alpha_{i}\geq0,&space;\sum_{i=1}^{N}\alpha_{i}y_{i}=0" title="\large argmax\sum_{i=1}^n{\alpha_{i}}-\frac{1}{2}{\sum_{i=1}^{n}}{\sum_{j=1}^{n}}y_{i}y_{j}\alpha_{i}\alpha_{j}\left \langle x_{i},x_{j} \right \rangle\\ s.t. \alpha_{i}\geq0, \sum_{i=1}^{N}\alpha_{i}y_{i}=0" /></a></center></p>
 
-这时候，我们需要求解一系列的<a href="https://www.codecogs.com/eqnedit.php?latex=\large&space;\alpha_{1},\alpha_{2},\alpha_{3}..." target="_blank"><img src="https://latex.codecogs.com/png.latex?\large&space;\alpha_{1},\alpha_{2},\alpha_{3}..." title="\large \alpha_{1},\alpha_{2},\alpha_{3}..." /></a>值了，只要得到了 <a href="https://www.codecogs.com/eqnedit.php?latex=\large&space;\alpha_{1}" target="_blank"><img src="https://latex.codecogs.com/png.latex?\large&space;\alpha_{1}" title="\large \alpha_{1}" /></a>的值，那么W,b 就好求了。[《西瓜书》](https://book.douban.com/subject/26708119/)上也就到了这里，告诉我们这是一个二次规划问题（这我也不会啊😭）。顺理成章地引入了 SMO 算法来求解<a href="https://www.codecogs.com/eqnedit.php?latex=\large&space;\alpha_{1}" target="_blank"><img src="https://latex.codecogs.com/png.latex?\large&space;\alpha_{1}" title="\large \alpha_{1}" /></a>，得到了<a href="https://www.codecogs.com/eqnedit.php?latex=\large&space;\alpha_{1}" target="_blank"><img src="https://latex.codecogs.com/png.latex?\large&space;\alpha_{1}" title="\large \alpha_{1}" /></a>后，对W,b进行更新迭代：
+这时候，我们需要求解一系列的<a href="https://www.codecogs.com/eqnedit.php?latex=\large&space;\alpha_{1},\alpha_{2},\alpha_{3}..." target="_blank"><img src="https://latex.codecogs.com/png.latex?\large&space;\alpha_{1},\alpha_{2},\alpha_{3}..." title="\large \alpha_{1},\alpha_{2},\alpha_{3}..." /></a>值了，只要得到了 <a href="https://www.codecogs.com/eqnedit.php?latex=\large&space;\alpha_{1}" target="_blank"><img src="https://latex.codecogs.com/png.latex?\large&space;\alpha_{1}" title="\large \alpha_{1}" /></a>的值，那么W,b 就好求了。 [西瓜书](https://book.douban.com/subject/26708119/)上也就到了这里，告诉我们这是一个二次规划问题（这我也不会啊😭）。顺理成章地引入了 SMO 算法来求解<a href="https://www.codecogs.com/eqnedit.php?latex=\large&space;\alpha_{1}" target="_blank"><img src="https://latex.codecogs.com/png.latex?\large&space;\alpha_{1}" title="\large \alpha_{1}" /></a>，得到了<a href="https://www.codecogs.com/eqnedit.php?latex=\large&space;\alpha_{1}" target="_blank"><img src="https://latex.codecogs.com/png.latex?\large&space;\alpha_{1}" title="\large \alpha_{1}" /></a>后，对W,b进行更新迭代：
 
 <div>![](https://github.com/anxingle/anxingle.github.io/blob/master/public/img/ML/svm_latex.png?raw=true)
 
@@ -25,7 +25,7 @@ description: 面试遇到过的问题
 即可求出超分类面，也就是分类函数:
 
 <p><center><a href="https://www.codecogs.com/eqnedit.php?latex=\large&space;f(x)=W^Tx&plus;b&space;=&space;\sum_{i=1}^m\alpha_{i}y_{i}x_{i}^T&plus;b" target="_blank"><img src="https://latex.codecogs.com/png.latex?\large&space;f(x)=W^Tx&plus;b&space;=&space;\sum_{i=1}^m\alpha_{i}y_{i}x_{i}^T&plus;b" title="\large f(x)=W^Tx+b = \sum_{i=1}^m\alpha_{i}y_{i}x_{i}^T+b" /></a></center></p>
-这是基本的SVM推导，如果这一步还不知道怎么来的，那就需要拿[《西瓜书》](https://book.douban.com/subject/26708119/)好好推导一下了。
+这是基本的SVM推导，如果这一步还不知道怎么来的，那就需要拿 [西瓜书](https://book.douban.com/subject/26708119/)好好推导一下了。
 
 <object width="100%" height="350" type="application/pdf" data="https://raw.githubusercontent.com/anxingle/Exam/dac71b6b54ac42b41cc76cb8996c030d18f58c26/pic/SMO.pdf#zoom=85&scrollbar=0&toolbar=0&navpanes=0" id="pdf_content" style="pointer-events: none;"></object>
 我们回过头来继续看SMO算法如何来求解的<a href="https://www.codecogs.com/eqnedit.php?latex=\large&space;\alpha_{1,2,3...}" target="_blank"><img src="https://latex.codecogs.com/png.latex?\large&space;\alpha_{1,2,3...}" title="\large \alpha_{1,2,3...}" /></a> ，实际上这里我也不能明白SMO的精髓，只能按着 [wikipedia SMO序列最小优化算法](https://zh.wikipedia.org/wiki/序列最小优化算法中)  介绍的的流程来进行计算了😏。
@@ -60,6 +60,27 @@ description: 面试遇到过的问题
 
 <p><center><a href="https://www.codecogs.com/eqnedit.php?latex=\large&space;\alpha_{1}^{new}=\alpha_{1}^{old}&space;&plus;&space;y_{1}y_{2}(\alpha_{2}^{old}-\alpha_{2}^{new})" target="_blank"><img src="https://latex.codecogs.com/png.latex?\large&space;\alpha_{1}^{new}=\alpha_{1}^{old}&space;&plus;&space;y_{1}y_{2}(\alpha_{2}^{old}-\alpha_{2}^{new})" title="\large \alpha_{1}^{new}=\alpha_{1}^{old} + y_{1}y_{2}(\alpha_{2}^{old}-\alpha_{2}^{new})" /></a></center></p>然后循环对所有的<a href="https://www.codecogs.com/eqnedit.php?latex=\large&space;\alpha_{i}" target="_blank"><img src="https://latex.codecogs.com/png.latex?\large&space;\alpha_{i}" title="\large \alpha_{i}" /></a>进行选取，便可以进行优化更新了。
 
-根据Platt的原文提供的伪代码，我们有如下实现(**PC或MAC下加载以下代码展示**)：
+根据Platt的原文提供的伪代码，我们有如下实现**(PC或MAC下加载以下代码展示)**：
+
+## 数据分布如下：
+<script src="https://gist.github.com/anxingle/2b6a3be40432542f9013abac4fa6de95.js"></script>
+
+绘制：
+
+![](https://github.com/anxingle/anxingle.github.io/blob/master/public/img/ML/svm_data.png?raw=true)
+
+
+
 
 <script src="https://gist.github.com/anxingle/d5b9084cdfd27ed42a92ebb8b1674959.js"></script>
+
+![](https://github.com/anxingle/anxingle.github.io/blob/master/public/img/ML/svm_line.png?raw=true)
+
+## 致谢
+
+本文参考文章：
+[理解支持向量机的三重境界](https://www.cnblogs.com/v-July-v/archive/2012/06/01/2539022.html)
+
+[看了这篇文章你还不懂SVM你就来打我](https://zhuanlan.zhihu.com/p/49331510)
+
+[一起学SVM之python实现SMO算法](https://www.bilibili.com/video/BV145411s7nY?t=3224)
