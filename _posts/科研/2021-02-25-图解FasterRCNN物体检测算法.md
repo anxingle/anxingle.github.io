@@ -9,7 +9,7 @@ description:
 
 
 ##       
-Faster RCNN作为经典的两阶段目标检测算法,实现细节超多,不太好理解. 花了好久终于把代码理清楚了,这里特别感谢@陈云 大佬的 [simple-faster-rcnn-pytorch](https://github.com/chenyuntc/simple-faster-rcnn-pytorch) 项目,代码简洁易懂,非常适合学习. 也参考了 @BBuf 的[代码解析](https://www.zhihu.com/column/giantpandacv) 以及 tryo labs 的[tutorial](https://tryolabs.com/blog/2018/01/18/faster-r-cnn-down-the-rabbit-hole-of-modern-object-detection/). 参考图片部分均会指明. 
+Faster RCNN作为经典的两阶段目标检测算法,实现细节超多,不太好理解. 花了好久终于把代码理清楚了,这里特别感谢@陈云 大佬的 [simple-faster-rcnn-pytorch](https://github.com/chenyuntc/simple-faster-rcnn-pytorch) 项目,代码简洁易懂,非常适合学习. 也参考了 @BBuf 的[代码解析](https://www.zhihu.com/column/giantpandacv) 以及 tryo labs 的[tutorial](https://tryolabs.com/blog/2018/01/18/faster-r-cnn-down-the-rabbit-hole-of-modern-object-detection/). 参考图片部分均会指明(@tryolabs 部分居多). 
 
 论到目标检测, 一个很自然的想法就是直接在图片上划分某些区域, 然后判断这些区域是否为 (或含有) object部分. RCNN就是沿着这种朴素的思路发展而来的. 个人认为从RCNN到Faster RCNN最为重要的就是候选区域(Proposal)的生成, 从原始的图像分割到基于anchor, 速度也越来越快. 如何理解呢？
 
