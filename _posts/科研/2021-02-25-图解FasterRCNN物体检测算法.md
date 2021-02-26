@@ -672,7 +672,7 @@ class FasterRCNN(nn.Module):
 ![](https://github.com/anxingle/anxingle.github.io/blob/master/public/img/cv/Rpn_visual.jpg?raw=true)
 
 <details>
-  <summary>点击显示: faster_rcnn_vgg16.py</summary>
+  <summary>点击显示: region_proposal_network.py</summary>
 
 ```python
 class RegionProposalNetwork(nn.Module):
