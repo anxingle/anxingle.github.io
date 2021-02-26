@@ -543,7 +543,7 @@ class FasterRCNNVGG16(FasterRCNN):
 代码不难理解. 类继承自 `FasterRCNN` ,  `forward` 在父类中实现了:
 
 <details>
-  <summary>点击显示: faster_rcnn_vgg16.py</summary>
+  <summary>点击显示: faster_rcnn.py</summary>
 
 ```python
 class FasterRCNN(nn.Module):
