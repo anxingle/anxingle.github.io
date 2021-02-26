@@ -929,7 +929,7 @@ class VGG16RoIHead(nn.Module):
 ![](https://github.com/anxingle/anxingle.github.io/blob/master/public/img/cv/Creator_tool.jpg?raw=true)
 
 <details>
-  <summary>点击显示: VGG16RoIHead.py</summary>
+  <summary>点击显示: creator_tool.py</summary>
 
 ```python
 # ProposalCreator 产生 2000 个 ROIs, 但是这些 ROIs 并不都用于训练
